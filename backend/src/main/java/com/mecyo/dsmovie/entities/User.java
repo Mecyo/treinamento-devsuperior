@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable{
@@ -21,4 +23,7 @@ public class User implements Serializable{
 	private Long id;
 	private String email;
 
+	public User(String email) {
+		this.email = email;
+	}
 }
