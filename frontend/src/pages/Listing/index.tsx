@@ -1,7 +1,6 @@
 import Pagination from "components/Pagination";
 import MovieCard from "components/MovieCard";
 import MovieService from "services/MovieService";
-import DataTable from "react-data-table-component";
 import Movie from "models/Movie";
 import { useState } from "react";
 import React from "react";
