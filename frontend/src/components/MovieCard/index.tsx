@@ -1,16 +1,20 @@
 import MovieScore from "components/MovieScore";
+import Movie from "models/Movie";
 import { Link } from "react-router-dom";
+import React, { useState } from 'react';
 
-const movie = {
-  id: 1,
-  image:
-    "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/jBJWaqoSCiARWtfV0GlqHrcdidd.jpg",
-  title: "The Witcher",
-  count: 2,
-  score: 4.5,
-};
 
-function MovieCard() {
+function MovieCard(props:{movie: Movie}) {
+  let [movie, setMovie] = useState<Movie>();
+
+  React.useEffect(() => {
+      setMovie(props.movie);
+  }, [props]);
+
+  if(!movie) {
+    movie = new Movie();
+  }
+
   return (
     <div>
       <img

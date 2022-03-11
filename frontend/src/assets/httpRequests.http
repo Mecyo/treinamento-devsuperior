@@ -17,6 +17,9 @@ content-type: application/json
 ###Users
 GET https://dsmovie-mecyo.herokuapp.com/users HTTP/1.1
 
+###Movies
+GET https://dsmovie-mecyo.herokuapp.com/movies HTTP/1.1
+
 ###Scores
 GET https://dsmovie-mecyo.herokuapp.com/scores HTTP/1.1
 

@@ -33,7 +33,7 @@ public class ScoreConttroler {
 	}
 	
 	@PutMapping(value = "/avaliar")
-	public MovieDTO findById(@RequestBody ScoreDTO score) throws Exception {
+	public MovieDTO avaliar(@RequestBody ScoreDTO score) throws Exception {
 		
 		return this.service.avaliar(score);
 	}
