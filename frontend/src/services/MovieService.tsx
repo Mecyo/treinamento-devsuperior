@@ -17,11 +17,11 @@ class MovieService {
     return response;
   }
 
-  async findAll(page: MoviePage): Promise<MoviePage> {
+  async findAll(numberPage: number, pageSize: number): Promise<MoviePage> {
     let response = new MoviePage();
 
     await api
-      .get(`${MOVIES_COLLECTION_URL}?number=${page.number}&size=${page.size}&sort=id`)
+      .get(`${MOVIES_COLLECTION_URL}?page=${numberPage}&size=${pageSize}&sort=id`)
       .then((res) => {
         response = res.data;
       });

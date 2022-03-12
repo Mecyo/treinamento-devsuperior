@@ -13,7 +13,7 @@ function MovieStars({ score } : Props) {
 
   for (var i=1; i < 6; i++) {
     list.push(
-      isHalf(i, score) ? <StarHalf /> : isFull(i, score) ? <StarFull /> : <StarEmpty />
+      isHalf(i, score) ? <StarHalf key={i} /> : isFull(i, score) ? <StarFull  key={i}/> : <StarEmpty  key={i}/>
     );
   }
 

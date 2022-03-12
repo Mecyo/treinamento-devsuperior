@@ -5,24 +5,38 @@ import './styles.css'
 
 
 type Props = {
-  paginator: MoviePage;
+  paginator: MoviePage,
+  onChange: Function
 }
 
-function Pagination({ paginator } : Props) {
+function Pagination({ paginator, onChange } : Props) {
 
+  const nextPage = () => {
+    onChange(paginator.number + 1);
+  }
+
+  const previousPage = () => {
+    onChange(paginator.number - 1);
+  }
+  
   return (
     <div className="dsmovie-pagination-container">
-    <div className="dsmovie-pagination-box">
-        <button className="dsmovie-pagination-button" disabled={paginator.first} >
+      <div className="dsmovie-pagination-box">
+        <button className="dsmovie-pagination-button" disabled={paginator.first} onClick={previousPage}>
             <ArrowLeft />
         </button>
         <p>{`${paginator.number + 1} de ${paginator.totalPages}`}</p>
-        <button className="dsmovie-pagination-button" disabled={paginator.last} >
+        <button className="dsmovie-pagination-button" disabled={isLastPage(paginator.last)} onClick={nextPage}>
             <ArrowRight />
         </button>
+      </div>
     </div>
-</div>
   );
+}
+
+function isLastPage(last: boolean) {
+  debugger
+  return last;
 }
 
 export default Pagination;

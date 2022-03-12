@@ -4,33 +4,29 @@ import MovieService from "services/MovieService";
 import { useState } from "react";
 import React from "react";
 import MoviePage from "models/MoviePage";
-import Movie from "models/Movie";
 
 const service = new MovieService();
 
 function Listing() {
   const [page, setPage] = useState<MoviePage>(new MoviePage());
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [pageNumber, setPageNumber] = useState<number>(0);
 
   React.useEffect(() => {
-    const fetchMovies = async () => {
-      const data = await service.findAll(page);
-      let newPage = data;
-      setMovies(data.content);
+      service.findAll(pageNumber, page.size).then(data => {
+        setPage(data);
+      });
+  }, [pageNumber, page.size]);
 
-      newPage.content = [];
-
-      setPage(newPage);
-    };
-    fetchMovies();
-  }, [page]);
+  const handlePageChange = (newPage : number) => {
+    setPageNumber(newPage);
+  }
 
   return (
     <>
-      <Pagination paginator={page}/>
+      <Pagination paginator={page} onChange={handlePageChange}/>
       <div className="container">
         <div className="row">
-          {movies.map(movie => (
+          {page.content.map(movie => (
               <div key={movie.id} className="col-sm-6 col-lg-4 col-xl-3 mb-3">
                 <MovieCard movie={movie}/>
               </div>
