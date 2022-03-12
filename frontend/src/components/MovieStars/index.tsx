@@ -2,21 +2,18 @@ import { ReactComponent as StarFull } from "assets/img/star-full.svg";
 import { ReactComponent as StarHalf } from "assets/img/star-half.svg";
 import { ReactComponent as StarEmpty } from "assets/img/star-empty.svg";
 import "./styles.css";
-import { useState } from "react";
-import React from 'react';
 
-function MovieStars(props:{score: number}) {
-  const [starScore, setScore] = useState(0);
+type Props = {
+  score: number
+} 
 
-  React.useEffect(() => {
-      setScore(props.score);
-  }, [props]);
+function MovieStars({ score } : Props) {
 
   const list: any[] = [];
 
   for (var i=1; i < 6; i++) {
     list.push(
-      isHalf(i, starScore) ? <StarHalf /> : isFull(i, starScore) ? <StarFull /> : <StarEmpty />
+      isHalf(i, score) ? <StarHalf /> : isFull(i, score) ? <StarFull /> : <StarEmpty />
     );
   }
 
