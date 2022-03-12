@@ -6,7 +6,7 @@ import { useState } from "react";
 import React from 'react';
 
 function MovieStars(props:{score: number}) {
-  let [starScore, setScore] = useState(0);
+  const [starScore, setScore] = useState(0);
 
   React.useEffect(() => {
       setScore(props.score);

@@ -5,15 +5,11 @@ import React, { useState } from 'react';
 
 
 function MovieCard(props:{movie: Movie}) {
-  let [movie, setMovie] = useState<Movie>();
+  const [movie, setMovie] = useState<Movie>(new Movie());
 
   React.useEffect(() => {
       setMovie(props.movie);
   }, [props]);
-
-  if(!movie) {
-    movie = new Movie();
-  }
 
   return (
     <div>

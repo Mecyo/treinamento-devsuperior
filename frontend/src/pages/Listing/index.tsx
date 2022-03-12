@@ -8,21 +8,29 @@ import React from "react";
 const service = new MovieService();
 
 function Listing() {
-  let [movies, setMovies] = useState<Movie[]>();
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [totalElements, setTotalElements] = useState<number>(0);
+  const [size, setSize] = useState<number>(0);
+  const [pageNumber, setPageNumber] = useState<number>(0);
+  const [last, setLast] = useState<boolean>(false);
+  const [first, setFirst] = useState<boolean>(false);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   React.useEffect(() => {
     const fetchMovies = async () => {
       const data = await service.findAll(0, 1, 20);
-      setMovies(data);
+      setMovies(data.content);
+      setTotalPages(data.totalPages);
+      setTotalElements(data.totalElements);
+      setSize(data.size);
+      setPageNumber(data.number);
+      setLast(data.last);
+      setFirst(data.first);
     };
     fetchMovies();
   }, []);
 
   const list: any[] = [];
-
-  if (!movies) {
-    movies = [];
-  }
 
   for (const movie of movies) {
     list.push(
@@ -34,7 +42,7 @@ function Listing() {
 
   return (
     <>
-      <Pagination />
+      <Pagination totalPages={totalPages} totalElements={totalElements} size={size} pageNumber={pageNumber} last={last} first={first}/>
       <div className="container">
         <div className="row">
           {list}
