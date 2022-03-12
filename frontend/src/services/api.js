@@ -1,7 +1,8 @@
 import axios from "axios";
+import { BASE_URL } from "utils/configuration";
 
 const api = axios.create({
-  baseURL: "https://dsmovie-mecyo.herokuapp.com",
+  baseURL: BASE_URL,
 });
 
 export default api;

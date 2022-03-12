@@ -1,7 +1,8 @@
 import Movie from "models/Movie";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MovieService from "services/MovieService";
+import { validateEmail } from "utils/validate";
 import './styles.css'
 
 type Props = {
@@ -13,6 +14,8 @@ const service = new MovieService();
 function FormCard({ movieId } : Props) {
   const [movie, setMovie] = useState<Movie>(new Movie());
 
+  const navigate = useNavigate();
+
   React.useEffect(() => {
     const fetchMovie = async () => {
       const data = await service.findById(movieId);
@@ -21,12 +24,29 @@ function FormCard({ movieId } : Props) {
     fetchMovie();
   }, [movieId]);
   
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const email = (event.target as any).email.value;
+    const score = (event.target as any).score.value;
+    const idMovie = Number.parseInt(movieId);
+
+    if(!validateEmail(email)) {
+      console.log(`O valor: '${email}' não é um tipo válido para e-mail!`);
+      return;
+    }
+
+    service.avaliar({value: score, userEmail: email, movieId:  idMovie}).then((res) => {
+      navigate("/");
+    });
+  }
+
   return (
     <div className="dsmovie-form-container">
       <img className="dsmovie-movie-card-image" src={movie.image} alt={movie.title} />
       <div className="dsmovie-card-bottom-container">
         <h3>{movie.title}</h3>
-        <form className="dsmovie-form">
+        <form className="dsmovie-form" onSubmit={handleSubmit}>
           <div className="form-group dsmovie-form-group">
             <label htmlFor="email">Informe seu email</label>
             <input type="email" className="form-control" id="email" />
