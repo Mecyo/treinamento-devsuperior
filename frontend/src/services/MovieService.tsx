@@ -1,8 +1,21 @@
 import api from "./api.js";
 import MoviePage from 'models/MoviePage';
 import { MOVIES_COLLECTION_URL, SCORE_AVALIAR_URL } from "utils/configuration";
+import Movie from "models/Movie";
 
 class MovieService {
+
+  async findById(movieId: string | undefined): Promise<Movie> {
+    let response = new Movie();
+
+    await api
+      .get(`${MOVIES_COLLECTION_URL}/${movieId}`)
+      .then((res) => {
+        response = res.data;
+      });
+
+    return response;
+  }
 
   async findAll(page: MoviePage): Promise<MoviePage> {
     let response = new MoviePage();

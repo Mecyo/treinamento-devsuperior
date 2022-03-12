@@ -25,16 +25,6 @@ function Listing() {
     fetchMovies();
   }, [page]);
 
-  const list: any[] = [];
-
-  for (const movie of movies) {
-    list.push(
-      <div key={movie.id} className="col-sm-6 col-lg-4 col-xl-3 mb-3">
-        <MovieCard movie={movie}/>
-      </div>
-    );
-  }
-
   return (
     <>
       <Pagination paginator={page}/>
