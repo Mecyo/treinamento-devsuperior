@@ -1,16 +1,13 @@
 import MovieScore from "components/MovieScore";
 import Movie from "models/Movie";
 import { Link } from "react-router-dom";
-import React, { useState } from 'react';
 
+type Props = {
+  movie: Movie;
+}
 
-function MovieCard(props:{movie: Movie}) {
-  const [movie, setMovie] = useState<Movie>(new Movie());
-
-  React.useEffect(() => {
-      setMovie(props.movie);
-  }, [props]);
-
+function MovieCard({ movie } : Props) {
+  
   return (
     <div>
       <img

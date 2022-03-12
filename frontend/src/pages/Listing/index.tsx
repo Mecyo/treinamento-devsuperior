@@ -1,34 +1,29 @@
 import Pagination from "components/Pagination";
 import MovieCard from "components/MovieCard";
 import MovieService from "services/MovieService";
-import Movie from "models/Movie";
 import { useState } from "react";
 import React from "react";
+import MoviePage from "models/MoviePage";
+import Movie from "models/Movie";
 
 const service = new MovieService();
 
 function Listing() {
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [totalElements, setTotalElements] = useState<number>(0);
-  const [size, setSize] = useState<number>(0);
-  const [pageNumber, setPageNumber] = useState<number>(0);
-  const [last, setLast] = useState<boolean>(false);
-  const [first, setFirst] = useState<boolean>(false);
+  const [page, setPage] = useState<MoviePage>(new MoviePage());
   const [movies, setMovies] = useState<Movie[]>([]);
 
   React.useEffect(() => {
     const fetchMovies = async () => {
-      const data = await service.findAll(0, 1, 20);
+      const data = await service.findAll(page);
+      let newPage = data;
       setMovies(data.content);
-      setTotalPages(data.totalPages);
-      setTotalElements(data.totalElements);
-      setSize(data.size);
-      setPageNumber(data.number);
-      setLast(data.last);
-      setFirst(data.first);
+
+      newPage.content = [];
+
+      setPage(newPage);
     };
     fetchMovies();
-  }, []);
+  }, [page]);
 
   const list: any[] = [];
 
@@ -42,10 +37,15 @@ function Listing() {
 
   return (
     <>
-      <Pagination totalPages={totalPages} totalElements={totalElements} size={size} pageNumber={pageNumber} last={last} first={first}/>
+      <Pagination paginator={page}/>
       <div className="container">
         <div className="row">
-          {list}
+          {movies.map(movie => (
+              <div key={movie.id} className="col-sm-6 col-lg-4 col-xl-3 mb-3">
+                <MovieCard movie={movie}/>
+              </div>
+            )
+          )}
         </div>
       </div>
     </>

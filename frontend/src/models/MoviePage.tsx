@@ -2,14 +2,14 @@ import Movie from './Movie';
 class MoviePage {
     constructor() {
         this.content = [];
-        this.last = false;
+        this.last = true;
         this.totalPages = 0;
         this.totalElements = 0;
-        this.size = 0;
+        this.size = 10;
         this.number = 0;
-        this.first = false;
+        this.first = true;
         this.numberOfElements = 0;
-        this.empty = false;
+        this.empty = true;
       };
     content: Movie[];
     last: boolean;

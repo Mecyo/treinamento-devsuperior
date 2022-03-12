@@ -4,11 +4,11 @@ import { MOVIES_COLLECTION_URL, SCORE_AVALIAR_URL } from "utils/configuration";
 
 class MovieService {
 
-  async findAll(offset = 0, number = 2, size = 2): Promise<MoviePage> {
+  async findAll(page: MoviePage): Promise<MoviePage> {
     let response = new MoviePage();
 
     await api
-      .get(`${MOVIES_COLLECTION_URL}?offset=${offset}&number=${number}&size=${size}&sort=id`)
+      .get(`${MOVIES_COLLECTION_URL}?number=${page.number}&size=${page.size}&sort=id`)
       .then((res) => {
         response = res.data;
       });
