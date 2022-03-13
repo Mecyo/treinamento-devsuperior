@@ -35,7 +35,6 @@ function Pagination({ paginator, onChange } : Props) {
 }
 
 function isLastPage(last: boolean) {
-  debugger
   return last;
 }
 

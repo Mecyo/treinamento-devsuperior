@@ -17,3 +17,7 @@ a, a:hover {
   text-decoration: none;
   color: unset;
 }
+
+.display-none {
+  display: none;
+}

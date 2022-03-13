@@ -1,6 +1,9 @@
 ###Users
 GET http://localhost:8080/users HTTP/1.1
 
+###Movie
+GET http://localhost:8080/movies/1 HTTP/1.1
+
 ###Scores
 GET http://localhost:8080/scores HTTP/1.1
 
@@ -9,9 +12,9 @@ PUT http://localhost:8080/scores/avaliar HTTP/1.1
 content-type: application/json
 
 {
-    "userEmail": "jojo@hotmail.com",
-	"movieId": 1,
-	"value": 5
+    "userEmail": "ejsmao@hotmail.com",
+	"movieId": 4,
+	"value": 3
 }
 
 ###Users
@@ -28,7 +31,7 @@ PUT https://dsmovie-mecyo.herokuapp.com/scores/avaliar HTTP/1.1
 content-type: application/json
 
 {
-    "userEmail": "ejsmao@hotmail.com",
+    "userEmail": "jojao23@hotmail.com",
 	"movieId": 1,
-	"value": 3
+	"value": 1
 }
